@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: debug
+  name: debug-tool
+spec:
+  containers:
+  - name: debug-tool
+    image: alpine:latest
+    imagePullPolicy: Always
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+      runAsUser: 1000
+    command: ["/bin/sh"]
+    args: ["-c", "sleep infinity"]
+    resources:
+      requests:
+        memory: "128Mi"
+        cpu: "250m"
+      limits:
+        memory: "256Mi"
+        cpu: "500m"
+    volumeMounts:
+      - name: tmp
+        mountPath: /tmp
+  volumes:
+    - name: tmp
+      emptyDir: {} 
