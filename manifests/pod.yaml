@@ -4,6 +4,7 @@ metadata:
   labels:
     app: debug
   name: debug-tool
+  namespace: default
 spec:
   containers:
   - name: debug-tool
